@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot UI</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <button class="open-chatbot-button">Open Chatbot</button>
+    <div class="chat-container hidden">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
+                <span class="user-name">Annie Smith</span>
+            </div>
+            <div class="chat-header-options">...</div>
+        </div>
+        <div class="chat-messages">
+            <div class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" placeholder="Type a message..." class="chat-input">
+            <div class="chat-input-options">
+                <button class="attach-button">📎</button>
+                <button class="emoji-button">😊</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatbotButton = document.querySelector('.open-chatbot-button');
+            const chatContainer = document.querySelector('.chat-container');
+            chatbotButton.addEventListener('click', function () {
+                chatContainer.classList.toggle('hidden');
+            });
+            document.querySelector('.chat-input').addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    let message = this.value.trim();
+                    if (message) {
+                        let messageContainer = document.createElement('div');
+                        messageContainer.textContent = message;
+                        document.querySelector('.chat-messages').appendChild(messageContainer);
+                        this.value = '';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
