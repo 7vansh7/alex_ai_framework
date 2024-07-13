@@ -132,3 +132,17 @@ body {
     font-size: 20px;
     margin-left: 10px;
 }
+
+.user-message {
+        text-align: right;
+        background-color: #dcf8c6;
+    }
+.bot-message {
+        text-align: left;
+        background-color: #ececec;
+    }
+
+
+
+
+
