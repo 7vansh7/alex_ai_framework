@@ -1,16 +1,12 @@
 from fastapi import FastAPI,File,UploadFile,Form
-from pydantic import BaseModel
 from uvicorn import run
-from config_cs import chat
+from config_cs import chat_cs
 from config_ce import chat_ce
 from PIL import Image
 import io
 from typing import Optional
 
 app = FastAPI()
-
-class Question(BaseModel):
-    question: str
 
 
 info = {
@@ -25,9 +21,9 @@ info = {
 
 
 @app.post('/cs/')
-def cs(question: Question):
-    res = chat.send_message(question.question + ",this is the customer data" + str(info))
-    return {"question":question.question,"answer":res.text}
+def cs(question:str = Form(...)):
+    res = chat_cs.send_message(question + ",this is the customer data" + str(info))
+    return {"question":question,"answer":res.text}
 
 @app.post('/ce/')
 async def ce(question:str = Form(...), file: Optional[UploadFile] = File(None)):
@@ -37,8 +33,6 @@ async def ce(question:str = Form(...), file: Optional[UploadFile] = File(None)):
     else:
         res = chat_ce.send_message(question)
     return {"question":question,"answer":res.text}
-
-
 
 
 if __name__ == "__main__":

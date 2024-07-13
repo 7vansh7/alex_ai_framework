@@ -15,4 +15,4 @@ chat starts,
 model = genai.GenerativeModel('gemini-1.5-flash',safety_settings=safety_settings,
                               system_instruction=inital_prompt_customer_service)
 
-chat = model.start_chat(history=history)
+chat_cs = model.start_chat(history=history)
