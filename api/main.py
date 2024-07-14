@@ -12,7 +12,7 @@ app = FastAPI()
 info = {
     "order_id" : 12345678,
     "status" : "out for delievery",
-    "time_to_delievery (minutes)" : 10,
+    "time_to_delievery ( minutes)" : 10,
     "order_info" : {"burger":1,"fries":1,"coke":1},
     "restaurant_name":"Burger King, Rajouri Garden",
     "restaurant_contact": 1234567890,
@@ -20,7 +20,7 @@ info = {
 }
 
 
-@app.post('/cs/')
+@app.post('/cs/') 
 def cs(question:str = Form(...)):
     res = chat_cs.send_message(question + ",this is the customer data" + str(info))
     return {"question":question,"answer":res.text}
