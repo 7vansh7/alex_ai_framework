@@ -1,4 +1,5 @@
 from fastapi import FastAPI,File,UploadFile,Form
+from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
 from config_cs import chat_cs
 from config_ce import chat_ce
@@ -7,6 +8,16 @@ import io
 from typing import Optional
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 info = {
@@ -20,18 +31,22 @@ info = {
 }
 
 
-@app.post('/cs/') 
+@app.post('/cs') 
 def cs(question:str = Form(...)):
     res = chat_cs.send_message(question + ",this is the customer data" + str(info))
+    # print({"question":question,"answer":res.text})
+    print(res.candidates)
     return {"question":question,"answer":res.text}
 
-@app.post('/ce/')
+@app.post('/ce')
 async def ce(question:str = Form(...), file: Optional[UploadFile] = File(None)):
     if file:
         image = Image.open(io.BytesIO(await file.read()))
         res = chat_ce.send_message([image,question])
     else:
         res = chat_ce.send_message(question)
+    # print({"question":question,"answer":res.text})
+    print(res.candidates)
     return {"question":question,"answer":res.text}
 
 
