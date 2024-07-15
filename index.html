@@ -1,18 +1,20 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot UI</title>
+    <title>Alex</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="chat-container">
+    <button class="open-chatbot-button">Chat</button>
+    <div class="chat-container hidden">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="user-avatar.png" alt="User Avatar" class="user-avatar">
-                <span class="user-name">Arnie Smith</span>
+                <img src="assets/user-avatar.png" alt="User Avatar" class="user-avatar">
+                <span class="user-name">Alex AI</span>
             </div>
-            <div class="chat-header-options">...</div>
         </div>
         <div class="chat-messages">
             <div class="typing-indicator">
@@ -20,25 +22,17 @@
             </div>
         </div>
         <div class="chat-input-container">
-            <input type="text" placeholder="Type a message..." class="chat-input">
+            <input type="text" placeholder="" class="chat-input">
             <div class="chat-input-options">
-                <button class="attach-button">📎</button>
-                <button class="emoji-button">😊</button>
+                <input type="file" id="file_input" />
+                <label for="file_input">
+                    <i class="material-icons" >add_a_photo</i>
+                <!-- <button class="attach-button"></button> -->
+            </label>
+                <button class="send-button"><i class="material-icons" >send</i></button>
             </div>
         </div>
     </div>
-    <script>// Add this in a script tag or in a separate JS file
-        document.querySelector('.chat-input').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                let message = this.value.trim();
-                if (message) {
-                    let messageContainer = document.createElement('div');
-                    messageContainer.textContent = message;
-                    document.querySelector('.chat-messages').appendChild(messageContainer);
-                    this.value = '';
-                }
-            }
-        });
-        </script>
+    <script src="script.js"></script>
 </body>
 </html>
