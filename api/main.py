@@ -34,7 +34,6 @@ info = {
 @app.post('/cs') 
 def cs(question:str = Form(...)):
     res = chat_cs.send_message(question + ",this is the customer data" + str(info))
-    # print({"question":question,"answer":res.text})
     print(res.candidates)
     return {"question":question,"answer":res.text}
 
@@ -45,7 +44,6 @@ async def ce(question:str = Form(...), file: Optional[UploadFile] = File(None)):
         res = chat_ce.send_message([image,question])
     else:
         res = chat_ce.send_message(question)
-    # print({"question":question,"answer":res.text})
     print(res.candidates)
     return {"question":question,"answer":res.text}
 
